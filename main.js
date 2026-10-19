@@ -66,7 +66,7 @@ document.getElementById('btn-recalc').addEventListener('click', () => main());
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault(); // чтобы браузер не делал ничего лишнего
-        main();                // запускаем пересчёт
+        main();                 // запускаем пересчёт
     }
 });
   
