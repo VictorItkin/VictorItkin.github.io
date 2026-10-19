@@ -1,25 +1,22 @@
-import {loadShaderSource, createShader} from "./utils.js"
-import {getBuffers, render} from "./render.js";
-import {initSettings, initGrid, extGrid, extSettings, setConstraintsIndices, initVertices, 
-    initWeights, updateVertices} from "./textile_model_pbd.js"
-import {getConnections} from "./get_connections.js"
-import {zeros3} from "./matrix.js";
+import { loadShaderSource, createShader}  from "./js code/view/utils.js"
+import { Settings } from "./js code/settings.js";
+import { Grid } from "./js code/grid.js";
+import { TextileModelPBD } from "./js code/textile_model_pbd.js";
+import { TextileModelExplicit } from "./js code/textile_model_explicit.js";
+import { SceneShot } from "./js code/view/scene_shot.js";
 
 async function main() {
     const canvas = document.getElementById('glCanvas');
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.floor(window.innerWidth * dpr);
     canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
 
     const gl = canvas.getContext('webgl', { antialias: false });
     if (!gl) { alert('WebGL не поддерживается'); return; }
         
-    // --- Вершинный шейдер: умножаем на матрицы и получаем gl_Position ---
+    // Вершинный шейдер
     const vsSource = await loadShaderSource('./shaders/colored_vertex.glsl');
-
-    // --- Фрагментный шейдер: цвет рёбер ---
+    // Фрагментный шейдер: цвет рёбер
     const fsSource = await loadShaderSource('./shaders/colored_fragment.glsl');
 
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
@@ -36,28 +33,28 @@ async function main() {
     gl.useProgram(program);
 
     // Инициализация
-    const settings = initSettings();
-    const grid = initGrid();
-    extGrid(settings, grid);
-    extSettings(settings, grid);
+    const settings = new Settings();
+    const grid = new Grid(settings);
+    settings.update(grid)
+    // Модель ткани
+    let model;
+    if (settings.model == "pdb")
+        model = new TextileModelPBD(settings, grid);
+    else if (settings.model == "explicit")
+        model = new TextileModelExplicit(settings, grid);
 
-    const vertices = initVertices(settings, grid);
-    setConstraintsIndices(vertices, settings, grid);
+    // Кадр отрисовки
+    const sceneShot = new SceneShot(model, settings, gl);    
 
-    const velosities = zeros3(vertices.length);
-    const weights = initWeights(settings, grid);
-    const connections3 = getConnections(grid.M, grid.K);
-    const connections = [...connections3.x, ...connections3.y, ...connections3.diag];
-    const vertexBuffer = getBuffers(vertices, connections, gl);
-
+    // Анимация
     let time = 0.0;
     const dt = grid.dt;
-    render(vertices, connections, gl, vertexBuffer, program, settings);
+    sceneShot.render(model, gl, program, settings);
     function animate() { 
-        time += dt;     
-        updateVertices(time, velosities, vertices, connections3, weights, settings, grid);
-        render(vertices, connections, gl, vertexBuffer, program, settings);
-      
+        time += dt;
+        model.update(time, settings, grid);
+
+        sceneShot.render(model, gl, program, settings);      
         requestAnimationFrame(animate);
     }  
     animate();
@@ -65,3 +62,11 @@ async function main() {
 
 main();
 window.addEventListener('resize', () => main());
+document.getElementById('btn-recalc').addEventListener('click', () => main());
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // чтобы браузер не делал ничего лишнего
+        main();                // запускаем пересчёт
+    }
+});
+  

@@ -1,0 +1,106 @@
+/* 1. Сброс отступов браузера, чтобы элементы занимали всю видимую область */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* 2. Делаем body гибким контейнером */
+body {
+    display: flex;
+    flex-direction: row; /* Располагаем элементы в строку (горизонтально) */
+    height: 100vh; /* Занимаем 100% высоты экрана */
+}
+
+/* 3. Задаем ширину canvas и растягиваем его на всю высоту */
+#glCanvas {
+    width: 75%;
+    height: 100%;
+    display: block; /* Убирает небольшой отступ снизу, который браузер добавляет canvas по умолчанию */
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+}
+
+/* 4. Задаем ширину панели и настраиваем ее внутреннее содержимое */
+#controls-panel {
+    width: 25%;
+    height: 100%;
+    padding: 20px; /* Внутренние отступы, чтобы текст не прилипал к краям */
+    box-sizing: border-box;
+    background-color: #fafafa;
+    overflow-y: auto; /* Опционально: если кнопок будет много, появится скролл */
+    border: none;  
+}
+
+.control-group {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+.control-input {
+    padding: 8px;
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 40%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.control-button {
+    display: block;   
+    margin: 20px auto 20px auto;  
+    padding: 20px;
+    background: #ccc;
+    color: #000;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+  
+.control-button:hover {
+    background: #aaa;
+} 
+
+/* Базовый label: кнопка + заголовок в ряд */
+#controls-panel label {
+    display: flex;
+    align-items: center;       /* кнопка и заголовок — по центру друг относительно друга */
+    gap: 10px;
+    margin: 0;                 /* убираем те самые 20px, которые ломали строку */
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000000;
+  }
+  
+  /* Блок с формулой — отдельный блок внутри label, стоит ниже */
+.formula-block {
+    display: block;
+    margin-top: 4px;           /* отступ от заголовка */
+    width: 100%;               /* чтобы формула не «утягивала» всю строку */
+}
+  
+.formula-title {
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+}
+  
+.formula-text {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    color: #444;
+    margin: 0;
+}
+  

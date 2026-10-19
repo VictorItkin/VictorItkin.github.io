@@ -2,14 +2,63 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <!-- Стили для формул -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    <script type="module" src="./js code/view/formula_search.js"></script>
+    <!--Стили страницы-->
+    <link rel="stylesheet" href="style.css">
     <title>Пример моделирования ткани</title>
-    <style>
-      body { margin: 0; overflow: hidden; background: #111; }
-      canvas { display: block; width: 100vw; height: 100vh; }
-    </style>
   </head>
   <body>
-    <canvas id="glCanvas"></canvas>
+    <canvas id="glCanvas"></canvas> 
+    <div id="controls-panel">
+        <div class="control-group">
+
+            <h3>Размерность сетки</h3>
+
+            <div class="grid-inputs">
+              <input type="number" id="grid-width-M" class="control-input" value="21" min="3" max="201">
+              <span class="grid-sep">$\times$</span>
+              <input type="number" id="grid-height-K" class="control-input" value="21" min="3" max="201">
+            </div> 
+        </div>
+        <h3>Колебания</h3>
+        <div class="oscillation">
+            <label class="control-input-row">
+                <span>Амплитуда:</span>
+                <input type="number" id="amplitude" class="control-input" value="15" min="0" max="1000">
+            </label>
+            <label class="control-input-row">
+                <span>Cкорость:</span>
+                <input type="number" id="frequency" class="control-input" value="500" min="0" max="1000">
+            </label>              
+        </div> 
+        <div class="control-item">
+            <label class="control-checkbox-row">
+              <input type="checkbox" id="use-gravity">
+              <span>Учитывать гравитацию</span>
+            </label>
+        </div>
+        <h3>Модель</h3>
+        <div class="control-group">
+            <label>
+              <input type="radio" name="model-type" value="pdb" checked>
+              <span class="label-text">Position Based Dynamics</span>
+            </label>
+            
+            <label for="mod-explicit">
+                <input type="radio" id="mod-explicit" name="model-type" value="explicit">
+                <span class="formula-title">Явная схема для уравнения</span>
+            </label>
+            <span>\[\frac{\partial^2 z}{\partial t^2} = 
+            v\left(\frac{\partial^2 z}{\partial x^2} + \frac{\partial^2 z}{\partial y^2}\right) - g\]</span>
+            
+        </div>
+        <button id="btn-recalc" class="control-button">Обновить</button>
+    </div>
+
     <script type="module" src="main.js"></script>
   </body>
 </html>

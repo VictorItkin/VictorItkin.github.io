@@ -22,20 +22,6 @@ function mat4_perspective(fovy, aspect, near, far) {
         0,          0,                 near * far * rangeInv,   0
     ]);
 }
-function mat4_ortho(left, right, bottom, top, near, far) {
-    const lr = 1 / (left - right);
-    const bt = 1 / (bottom - top);
-    const nf = 1 / (near - far);
-    return new Float32Array([
-    -2 * lr, 0,      0,     0,
-    0,     -2 * bt, 0,     0,
-    0,     0,      2 * nf, 0,
-    (left + right) * lr,
-    (bottom + top) * bt,
-    (near + far) * nf,
-    1
-    ]);
-}
 function mat4_rotateX(angle) {
     const c = Math.cos(angle), s = Math.sin(angle);
     const m = mat4_identity();
@@ -89,9 +75,9 @@ function fillArray(length, value = 0.0){
 
     return result;
 }
-function zeros3(length){
-    return fillArray(3*length);
+function zeros(length){
+    return fillArray(length);
 }
 
 export {mat4_rotateX, mat4_rotateY, mat4_multiply, mat4_translate, mat4_perspective,
-    pointIndexInVertices, fillArray, zeros3};
+    pointIndexInVertices, fillArray, zeros};
