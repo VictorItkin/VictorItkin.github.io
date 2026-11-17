@@ -1,4 +1,4 @@
-import { TextileModel } from "./textile_model.js"
+import { TextileModel } from "/js code/textile_model.js"
 
 export class TextileModelExplicit extends TextileModel{
     update(time, settings, grid){

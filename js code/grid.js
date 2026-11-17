@@ -1,4 +1,4 @@
-import { pointIndexInVertices } from "./view/matrix.js"
+import { pointIndexInVertices } from "/js code/view/matrix.js"
 export class Grid{
     M; // Количество точек по x
     K; // Количество точек по y

@@ -1,5 +1,5 @@
-import { zeros } from "./view/matrix.js"
-import { getConnections } from "./get_connections.js"
+import { zeros } from "/js code/view/matrix.js"
+import { getConnections } from "/js code/get_connections.js"
 
 export class TextileModel{
     vertices;
