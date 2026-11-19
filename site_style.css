@@ -104,11 +104,15 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
+
+  .image {
+    max-width: 500px;
+  }
   
   h1 {
     font-size: 24px;            /* размер шрифта; у заголовков по умолчанию крупный */
     text-align: center;           /* выравнивание: left, center, right */
-    margin: 0px 0 20px 0;         /* отступы: сверху справа снизу слева */
+    margin: 12px 0 6px 0;         /* отступы: сверху справа снизу слева */
     color: #000;             /* цвет — например, в тон вашей полосе меню */
     font-weight: 600;           /* жирность: 400 обычный, 600 полужирный, 700 жирный */
     line-height: 1.3; 
