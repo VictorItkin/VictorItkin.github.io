@@ -1,5 +1,5 @@
 import {mat4_rotateX, mat4_rotateY, mat4_multiply, mat4_translate, mat4_perspective} from "./matrix.js"
-import {makeBoxLines} from "./utils.js"
+import {makeBoxLines} from "/js code/view/utils.js"
 
 class CameraState{
     angleX = -80; // наклон вверх/вниз

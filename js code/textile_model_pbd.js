@@ -1,5 +1,5 @@
-import { TextileModel } from "./textile_model.js"
-import { fillArray } from "./view/matrix.js"; 
+import { TextileModel } from "/js code/textile_model.js"
+import { fillArray } from "/js code/view/matrix.js"; 
 
 export class TextileModelPBD extends TextileModel{
     weights;

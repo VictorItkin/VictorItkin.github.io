@@ -1,9 +1,9 @@
-import { loadShaderSource, createShader}  from "./js code/view/utils.js"
-import { Settings } from "./js code/settings.js";
-import { Grid } from "./js code/grid.js";
-import { TextileModelPBD } from "./js code/textile_model_pbd.js";
-import { TextileModelExplicit } from "./js code/textile_model_explicit.js";
-import { SceneShot } from "./js code/view/scene_shot.js";
+import { loadShaderSource, createShader}  from "/js code/view/utils.js"
+import { Settings } from "/js code/settings.js";
+import { Grid } from "/js code/grid.js";
+import { TextileModelPBD } from "/js code/textile_model_pbd.js";
+import { TextileModelExplicit } from "/js code/textile_model_explicit.js";
+import { SceneShot } from "/js code/view/scene_shot.js";
 
 async function main() {
     const canvas = document.getElementById('glCanvas');
@@ -15,9 +15,9 @@ async function main() {
     if (!gl) { alert('WebGL не поддерживается'); return; }
         
     // Вершинный шейдер
-    const vsSource = await loadShaderSource('./shaders/colored_vertex.glsl');
+    const vsSource = await loadShaderSource('/shaders/colored_vertex.glsl');
     // Фрагментный шейдер: цвет рёбер
-    const fsSource = await loadShaderSource('./shaders/colored_fragment.glsl');
+    const fsSource = await loadShaderSource('/shaders/colored_fragment.glsl');
 
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
