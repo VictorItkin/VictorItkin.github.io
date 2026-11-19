@@ -71,9 +71,21 @@ body {
     margin: 30px auto;
     padding: 0 20px;
     display: flex;
+    flex-direction: row;
     gap: 30px;
     align-items: flex-start;
   }
+
+  .vertical_container {
+    max-width: 900px;
+    margin: 30px auto;
+    margin-top: 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    align-items: stretch;
+}
 
   .page {
     flex: 1;              /* занимает всё место под меню (body у нас уже flex-колонка) */
@@ -100,6 +112,16 @@ body {
     color: #000;             /* цвет — например, в тон вашей полосе меню */
     font-weight: 600;           /* жирность: 400 обычный, 600 полужирный, 700 жирный */
     line-height: 1.3; 
+  }
+
+  h2 {
+    font-size: 18px;            /* размер шрифта; у заголовков по умолчанию крупный */
+    text-align: left;           /* выравнивание: left, center, right */
+    margin: 0px 0 0px 0px;         /* отступы: сверху справа снизу слева */
+    color: #000;             /* цвет — например, в тон вашей полосе меню */
+    font-weight: 400;           /* жирность: 400 обычный, 600 полужирный, 700 жирный */
+    font-style: italic;
+    line-height: 1.0; 
   }
   
   p {
