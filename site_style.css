@@ -105,8 +105,13 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 
-  .image {
+  .big_image {
     max-width: 500px;
+  }
+  .image {
+    max-width: 950px;
+    display: block;    
+    margin: 0 auto;   
   }
   
   h1 {
@@ -129,6 +134,7 @@ body {
   }
   
   p {
+    margin-top: 12px;
     margin-bottom: 12px;
   }
   
