@@ -149,6 +149,10 @@ body {
   a:hover   { color: #c0392b; text-decoration: underline; } /* при наведении мыши */
   a:active  { color: #e74c3c; }                          /* в момент нажатия */
 
+  .list {
+     margin: 16px 0;
+     padding-left: 16px;      /* отступ, где живут номера */
+  }
   .publist {
      margin: 16px 0;
      padding-left: 24px;      /* отступ, где живут номера */
